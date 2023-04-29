@@ -80,11 +80,11 @@ cp /root/moonbean/schema_qmrwisx41srrr8f.dump /root/subquery-indexer/.data/postg
 ```
 
 ```bash
-docker exec -it indexer_db pg_restore -v -j 2 -h localhost -p 5432 -U postgres -d postgres /root/subquery-indexer/.data/postgres/schema_qmzgazq7e1ozgfu.dump > /root/restore.log 2>&1
+docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /root/subquery-indexer/.data/postgres/schema_qmzgazq7e1ozgfu.dump > /root/restore.log 2>&1
 ```
 
 ```bash
-docker exec -it indexer_db pg_restore -v -j 2 -h localhost -p 5432 -U postgres -d postgres /root/subquery-indexer/.data/postgres/schema_qmrwisx41srrr8f.dump > /root/restore.log 2>&1
+docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /root/subquery-indexer/.data/postgres/schema_qmrwisx41srrr8f.dump > /root/restore.log 2>&1
 ```
 
 :::note
