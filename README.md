@@ -36,6 +36,11 @@ sudo apt install docker.io
 mkdir subquery-indexer && cd subquery-indexer
 curl https://raw.githubusercontent.com/subquery/indexer-services/kepler/docker-compose.yml -o docker-compose.yml
 ```
+
+>Important
+
+Please change the POSTGRES_PASSWORD in postgres and postgres-password in coordinator-service to your own one
+
 ## 3. Additional commands:
 
 - Check status of your node:
