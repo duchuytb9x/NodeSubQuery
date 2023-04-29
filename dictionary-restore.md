@@ -71,17 +71,25 @@ Alternatively you can choose the following steps to do the data restore manually
 
 2. Copy the `schema_xxxxxxx.dump` to `.data/postgres/` and then use this command:
 
+- Copy schema_qmzgazq7e1ozgfu.dump of Polkadot to `/root/subquery-indexer/.data/postgres`
+
 ```bash
 cp /root/polkadot/schema_qmzgazq7e1ozgfu.dump /root/subquery-indexer/.data/postgres/schema_qmzgazq7e1ozgfu.dump
 ```
+
+- Copy schema_qmrwisx41srrr8f.dump of Moonbeam to `/root/subquery-indexer/.data/postgres`
 
 ```bash
 cp /root/moonbean/schema_qmrwisx41srrr8f.dump /root/subquery-indexer/.data/postgres/schema_qmrwisx41srrr8f.dump
 ```
 
+- Run this command in `tmux`:
+
 ```bash
 docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmzgazq7e1ozgfu.dump > /root/restore.log 2>&1
 ```
+
+- Run this command in `tmux`:
 
 ```bash
 docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmrwisx41srrr8f.dump > /root/restore.log 2>&1
