@@ -130,11 +130,15 @@ curl -o moonbeam.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazon
 
 - Extract Polkadot Snapshot
 
-```tar -xvf polkadot.tar```
+```
+tar -xvf polkadot.tar
+```
 
 - Extract Moonbeam Snapshot
 
-```tar -xvf moonbeam.tar```
+```
+tar -xvf moonbeam.tar
+```
 
 - Extract Moonbeam Snapshot
 
@@ -149,6 +153,7 @@ cp /root/moonbeam/schema_qmrwisx41srrr8f.dump /root/subquery-indexer/.data/postg
 ```
 
 - Install Tmux
+
 ```
 apt install tmux
 ```
