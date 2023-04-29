@@ -15,7 +15,7 @@
 
 - docs & wiki [here](https://wiki.gear-tech.io/docs/)
 
-## 1. Install Gear full node (automatic script):
+## 1. Install Docker and Docker-Compose:
 >Build from source
 
 >You can setup your Gear full node in minutes by using automated script below
