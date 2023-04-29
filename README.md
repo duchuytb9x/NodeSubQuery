@@ -48,10 +48,10 @@ This will overwrite the existing docker-compose.yml file.
 Make sure the indexer service versions are correct:
 
 
-| __Service__                    |__Version__| 
-|--------------------------------|-----------|
-| onfinality/subql-coordinator   |  latest   |
-| onfinality/subql-indexer-proxy |  latest   |
+| Service                        | Version   |
+| :----------------------------- | :-------- |
+| onfinality/subql-coordinator   | latest    |
+| onfinality/subql-indexer-proxy | latest    |
 
 >Important
 >
