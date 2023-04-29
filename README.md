@@ -16,20 +16,25 @@
 - docs & wiki [here](https://wiki.gear-tech.io/docs/)
 
 ## 1. Install Docker and Docker-Compose:
-- Check status of your node:
+- Get update:
 ```
-sudo systemctl status gear-node
+sudo apt-get update
 ```
 
-- Check logs of your node:
+- Install the docker:
 ```
-sudo journalctl -n 100 -f -u gear-node
+sudo apt install docker.io
 ```
-## 2. Update Gear full node (automatic script):
->Build from source
->Script work correctly if you used source script run.sh for installation
+
+- Install the docker-compose:
 ```
-wget -O update.sh https://raw.githubusercontent.com/duchuytb9x/Node-Operation/main/GearV7.sh  && chmod +x update.sh && ./update.sh
+sudo apt install docker.io
+```
+## 2. Download the Docker Compose File for Indexer Services:
+>Run the following command:
+```
+mkdir subquery-indexer && cd subquery-indexer
+curl https://raw.githubusercontent.com/subquery/indexer-services/kepler/docker-compose.yml -o docker-compose.yml
 ```
 ## 3. Additional commands:
 
