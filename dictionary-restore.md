@@ -72,15 +72,15 @@ Alternatively you can choose the following steps to do the data restore manually
 2. Copy the `schema_xxxxxxx.dump` to `.data/postgres/` and then use this command:
 
 ```bash
-docker exec -it indexer_db pg_restore -v -j 2 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_xxxxxxx.dump > restore.log 2>&1 &
-```
-
-```bash
 cp /root/polkadot/schema_qmzgazq7e1ozgfu.dump /root/subquery-indexer/.data/postgres/schema_qmzgazq7e1ozgfu.dump
 ```
 
 ```bash
 cp /root/moonbean/schema_qmrwisx41srrr8f.dump /root/subquery-indexer/.data/postgres/schema_qmrwisx41srrr8f.dump
+```
+
+```bash
+docker exec -it indexer_db pg_restore -v -j 2 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_xxxxxxx.dump > restore.log 2>&1 &
 ```
 
 :::note
