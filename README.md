@@ -171,4 +171,8 @@ docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -
 docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmrwisx41srrr8f.dump > /root/restore.log 2>&1
 ```
 
+>Note
+>
+>We use the `-j` parameter to update the number of jobs running concurrently. Depending on your machine size, you may want to increase this number to speed up the restore process. [Read more](https://www.postgresql.org/docs/current/app-pgrestore.html)
+
 ## ALL DONE!!!
