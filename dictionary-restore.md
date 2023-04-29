@@ -25,10 +25,15 @@ sudo apt install aria2
 aria2c <Magnet_Link>
 ```
 
-To download from an S3 bucket
+- To download Polkadot from an S3 bucket
 
 ```bash
-curl -o dictionary.tar <Download_URL>
+curl -o dictionary.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazonaws.com/polkadot/polkadot.tar
+```
+- To download Moonbeam from an S3 bucket
+
+```bash
+curl -o dictionary.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazonaws.com/moonbean/moonbean.tar
 ```
 
 ## Restoring the Database Snapshot
