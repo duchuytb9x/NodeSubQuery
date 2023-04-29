@@ -43,6 +43,15 @@ Run the following command:
 mkdir subquery-indexer && cd subquery-indexer
 curl https://raw.githubusercontent.com/subquery/indexer-services/kepler/docker-compose.yml -o docker-compose.yml
 ```
+This will overwrite the existing docker-compose.yml file.
+
+Make sure the indexer service versions are correct:
+
+
+| __Service__                    |__Version__| 
+|--------------------------------|-----------|
+| onfinality/subql-coordinator   |  latest   |
+| onfinality/subql-indexer-proxy |  latest   |
 
 >Important
 >
