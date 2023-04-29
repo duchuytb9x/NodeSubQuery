@@ -28,12 +28,12 @@ aria2c <Magnet_Link>
 - To download Polkadot from an S3 bucket
 
 ```bash
-curl -o dictionary.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazonaws.com/polkadot/polkadot.tar
+curl -o polkadot.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazonaws.com/polkadot/polkadot.tar
 ```
 - To download Moonbeam from an S3 bucket
 
 ```bash
-curl -o dictionary.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazonaws.com/moonbean/moonbean.tar
+curl -o moonbean.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazonaws.com/moonbean/moonbean.tar
 ```
 
 ## Restoring the Database Snapshot
@@ -43,7 +43,11 @@ This assumes that you have an indexer [running locally](../../../run_publish/run
 First extract the dowloaded snapshot and then extract it using the following command. You will get 3 files: `.mmr` and `schema_xxxxxxx.dump` and a shell script: `restore.sh`
 
 ```bash
-tar -xvf dictionary.tar
+tar -xvf polkadot.tar
+```
+
+```bash
+tar -xvf moonbean.tar
 ```
 
 You can choose to use the `restore.sh` script to restore data automatically.
