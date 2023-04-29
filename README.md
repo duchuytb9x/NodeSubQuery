@@ -114,4 +114,61 @@ After that, verify that the service is running:
 systemctl status subquery.service
 ```
 
+## 5. Restoring Dictionary Projects:
+
+- Download Polkadot Snapshot
+
+```
+curl -o polkadot.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazonaws.com/polkadot/polkadot.tar
+```
+
+- Download Moonbeam Snapshot
+
+```
+curl -o moonbeam.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazonaws.com/moonbean/moonbean.tar
+```
+
+- Extract Polkadot Snapshot
+
+```tar -xvf polkadot.tar```
+
+- Extract Moonbeam Snapshot
+
+```tar -xvf moonbeam.tar```
+
+- Extract Moonbeam Snapshot
+
+```
+cp /root/polkadot/schema_qmzgazq7e1ozgfu.dump /root/subquery-indexer/.data/postgres/schema_qmzgazq7e1ozgfu.dump
+```
+
+- Extract Moonbeam Snapshot
+
+```
+cp /root/moonbeam/schema_qmrwisx41srrr8f.dump /root/subquery-indexer/.data/postgres/schema_qmrwisx41srrr8f.dump
+```
+
+- Install Tmux
+```
+apt install tmux
+```
+
+- Open Tmux
+
+```
+tmux
+```
+
+- Restore PostgresQL Polkadot database
+
+```
+docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmzgazq7e1ozgfu.dump > /root/restore.log 2>&1
+```
+
+- Restore PostgresQL Moonbeam database
+
+```
+docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmrwisx41srrr8f.dump > /root/restore.log 2>&1
+```
+
 ## ALL DONE!!!
