@@ -16,13 +16,14 @@
 - docs & wiki [here](https://wiki.gear-tech.io/docs/)
 
 ## 1. Install Docker and Docker-Compose:
->Build from source
-
->You can setup your Gear full node in minutes by using automated script below
-
->Tested on Ubuntu 20.04.5 LTS & Ubuntu 22.04.1 LTS
+- Check status of your node:
 ```
-wget -O run.sh https://raw.githubusercontent.com/papadritta/gear-m/main/box/run.sh && chmod +x run.sh && ./run.sh
+sudo systemctl status gear-node
+```
+
+- Check logs of your node:
+```
+sudo journalctl -n 100 -f -u gear-node
 ```
 ## 2. Update Gear full node (automatic script):
 >Build from source
