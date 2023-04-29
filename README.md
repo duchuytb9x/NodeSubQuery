@@ -180,4 +180,48 @@ docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -
 >
 >We use the `-j` parameter to update the number of jobs running concurrently. Depending on your machine size, you may want to increase this number to speed up the restore process. [Read more](https://www.postgresql.org/docs/current/app-pgrestore.html)
 
+The restore process will start and take quite a long time (like 2 days), please make sure you run this cmd in the background (use tools like tmux/screen/nohup). Here is an example of the output log.
+
+```
+pg_restore: creating SCHEMA "schema_qmzgazq7e1ozgfu"
+pg_restore: processing item 421 FUNCTION schema_notification()
+pg_restore: creating FUNCTION "schema_qmzgazq7e1ozgfu.schema_notification()"
+pg_restore: processing item 215 TABLE _metadata
+pg_restore: creating TABLE "schema_qmzgazq7e1ozgfu._metadata"
+pg_restore: processing item 216 TABLE _poi
+pg_restore: creating TABLE "schema_qmzgazq7e1ozgfu._poi"
+pg_restore: processing item 217 TABLE events
+pg_restore: creating TABLE "schema_qmzgazq7e1ozgfu.events"
+pg_restore: processing item 218 TABLE extrinsics
+pg_restore: creating TABLE "schema_qmzgazq7e1ozgfu.extrinsics"
+pg_restore: processing item 219 TABLE spec_versions
+pg_restore: creating TABLE "schema_qmzgazq7e1ozgfu.spec_versions"
+pg_restore: entering main parallel loop
+pg_restore: launching item 3311 TABLE DATA _metadata
+pg_restore: launching item 3312 TABLE DATA _poi
+pg_restore: launching item 3313 TABLE DATA events
+pg_restore: launching item 3314 TABLE DATA extrinsics
+pg_restore: launching item 3315 TABLE DATA spec_versions
+pg_restore: processing data for table "schema_qmzgazq7e1ozgfu.spec_versions"
+pg_restore: processing data for table "schema_qmzgazq7e1ozgfu.events"
+pg_restore: processing data for table "schema_qmzgazq7e1ozgfu._metadata"
+pg_restore: processing data for table "schema_qmzgazq7e1ozgfu._poi"
+pg_restore: processing data for table "schema_qmzgazq7e1ozgfu.extrinsics"
+pg_restore: finished item 3311 TABLE DATA _metadata
+pg_restore: launching item 3149 CONSTRAINT _metadata _metadata_pkey
+pg_restore: creating CONSTRAINT "schema_qmzgazq7e1ozgfu._metadata _metadata_pkey"
+pg_restore: finished item 3149 CONSTRAINT _metadata _metadata_pkey
+pg_restore: launching item 3183 TRIGGER _metadata 0x3f87069a64ae6471
+pg_restore: creating TRIGGER "schema_qmzgazq7e1ozgfu._metadata 0x3f87069a64ae6471"
+pg_restore: finished item 3183 TRIGGER _metadata 0x3f87069a64ae6471
+pg_restore: launching item 3184 TRIGGER _metadata 0xadf0dc4658acf912
+pg_restore: creating TRIGGER "schema_qmzgazq7e1ozgfu._metadata 0xadf0dc4658acf912"
+pg_restore: finished item 3184 TRIGGER _metadata 0xadf0dc4658acf912
+pg_restore: finished item 3315 TABLE DATA spec_versions
+pg_restore: launching item 3178 INDEX 0x510c96a4f8868d8a
+pg_restore: creating INDEX "schema_qmzgazq7e1ozgfu.0x510c96a4f8868d8a"
+```
+
+After the data restored, you can start adding the specific project to you service inside admin app, and start indexing the project, the indexing will start basing on the restored data and continue indexing the project.
+
 ## ALL DONE!!!
