@@ -57,7 +57,7 @@ There are 2 parameters to run this script, the first one is your `mmrPath` which
 sh restore.sh /home /home/ec2-user/indexer-services/.data/postgres > restore.log 2>&1 &
 ```
 
-:::note
+::: note
 Make sure your `indexer_db` and `indexer_coordinator` containers are running with healthy status
 :::
 
