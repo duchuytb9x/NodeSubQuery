@@ -54,7 +54,7 @@ You can choose to use the `restore.sh` script to restore data automatically.
 
 There are 2 parameters to run this script, the first one is your `mmrPath` which config in your coordinator container, the second one is you data folder path, normally it will be `.data/postgres` folder at the same path with the `docker-compose.yml` file. For example:
 ```
-sh restore.sh /home /home/ec2-user/indexer-services/.data/postgres > restore.log 2>&1 &
+sh restore.sh /home /root/indexer-services/.data/postgres > restore.log 2>&1 &
 ```
 
 ::: note
