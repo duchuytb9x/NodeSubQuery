@@ -116,64 +116,70 @@ systemctl status subquery.service
 
 ## 5. Restoring Dictionary Projects:
 
-- Download Polkadot Snapshot
+- Download Polkadot Snapshot:
 
 ```
 curl -o polkadot.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazonaws.com/polkadot/polkadot.tar
 ```
 
-- Download Moonbeam Snapshot
+- Download Moonbeam Snapshot:
 
 ```
 curl -o moonbeam.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazonaws.com/moonbean/moonbean.tar
 ```
 
-- Extract Polkadot Snapshot
+- Extract Polkadot Snapshot:
 
 ```
 tar -xvf polkadot.tar
 ```
 
-- Extract Moonbeam Snapshot
+- Extract Moonbeam Snapshot:
 
 ```
 tar -xvf moonbeam.tar
 ```
 
-- Extract Moonbeam Snapshot
+- Extract Moonbeam Snapshot:
 
 ```
 cp /root/polkadot/schema_qmzgazq7e1ozgfu.dump /root/subquery-indexer/.data/postgres/schema_qmzgazq7e1ozgfu.dump
 ```
 
-- Extract Moonbeam Snapshot
+- Extract Moonbeam Snapshot:
 
 ```
 cp /root/moonbeam/schema_qmrwisx41srrr8f.dump /root/subquery-indexer/.data/postgres/schema_qmrwisx41srrr8f.dump
 ```
 
-- Install Tmux
+- Install Tmux:
 
 ```
 apt install tmux
 ```
 
-- Open Tmux
+- Open Tmux:
 
 ```
 tmux
 ```
 
-- Restore PostgresQL Polkadot database
+- Restore PostgresQL Polkadot database:
 
 ```
-tmux new-session -d -s restore 'docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmzgazq7e1ozgfu.dump > /root/restore.log 2>&1'
+tmux new-session -d -s restorePolkadot 'docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmzgazq7e1ozgfu.dump > /root/restore.log 2>&1'
 ```
 
-- Restore PostgresQL Moonbeam database
+- Restore PostgresQL Moonbeam database:
 
 ```
-tmux new-session -d -s restore 'docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmrwisx41srrr8f.dump > /root/restore.log 2>&1'
+tmux new-session -d -s restoreMoonbeam 'docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmrwisx41srrr8f.dump > /root/restore.log 2>&1'
+```
+
+- To list the running tmux sessions, you can use the command:
+
+```
+tmux ls
 ```
 
 >Note
