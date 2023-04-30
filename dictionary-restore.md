@@ -52,6 +52,10 @@ tar -xvf polkadot.tar
 ```
 
 ```bash
+tar -xvf kusama.tar
+```
+
+```bash
 tar -xvf moonbean.tar
 ```
 
@@ -82,6 +86,12 @@ Alternatively you can choose the following steps to do the data restore manually
 cp /root/polkadot/schema_qmzgazq7e1ozgfu.dump /root/subquery-indexer/.data/postgres/schema_qmzgazq7e1ozgfu.dump
 ```
 
+- Copy schema_qmxwfcf8858yy92.dump of Kusama to `/root/subquery-indexer/.data/postgres`
+
+```bash
+cp /root/kusama/schema_qmxwfcf8858yy92.dump /root/subquery-indexer/.data/postgres/schema_qmxwfcf8858yy92.dump
+```
+
 - Copy schema_qmrwisx41srrr8f.dump of Moonbeam to `/root/subquery-indexer/.data/postgres`
 
 ```bash
@@ -92,6 +102,12 @@ cp /root/moonbean/schema_qmrwisx41srrr8f.dump /root/subquery-indexer/.data/postg
 
 ```bash
 docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmzgazq7e1ozgfu.dump > /root/restore.log 2>&1
+```
+
+- Run this command in `tmux`:
+
+```bash
+docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmxwfcf8858yy92.dump > /root/restore.log 2>&1
 ```
 
 - Run this command in `tmux`:
