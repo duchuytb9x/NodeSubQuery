@@ -122,6 +122,12 @@ systemctl status subquery.service
 curl -o polkadot.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazonaws.com/polkadot/polkadot.tar
 ```
 
+- Download Kusama Snapshot:
+
+```
+curl -o kusama.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazonaws.com/kusama/kusama.tar
+```
+
 - Download Moonbeam Snapshot:
 
 ```
@@ -133,20 +139,30 @@ curl -o moonbeam.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazon
 ```
 tar -xvf polkadot.tar
 ```
+- Extract Kusama Snapshot:
 
+```
+tar -xvf kusama.tar
+```
 - Extract Moonbeam Snapshot:
 
 ```
 tar -xvf moonbeam.tar
 ```
 
-- Extract Moonbeam Snapshot:
+- Copy schema_qmzgazq7e1ozgfu.dump of Polkadot to `/root/subquery-indexer/.data/postgres`:
 
 ```
 cp /root/polkadot/schema_qmzgazq7e1ozgfu.dump /root/subquery-indexer/.data/postgres/schema_qmzgazq7e1ozgfu.dump
 ```
 
-- Extract Moonbeam Snapshot:
+- Copy schema_qmxwfcf8858yy92.dump of Kusama to `/root/subquery-indexer/.data/postgres`:
+
+```
+cp /root/moonbeam/schema_qmxwfcf8858yy92.dump /root/subquery-indexer/.data/postgres/schema_qmxwfcf8858yy92.dump
+```
+
+- Copy schema_qmrwisx41srrr8f.dump of Moonbeam to `/root/subquery-indexer/.data/postgres`:
 
 ```
 cp /root/moonbeam/schema_qmrwisx41srrr8f.dump /root/subquery-indexer/.data/postgres/schema_qmrwisx41srrr8f.dump
@@ -168,6 +184,12 @@ tmux
 
 ```
 tmux new-session -d -s restorePolkadot 'docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmzgazq7e1ozgfu.dump > /root/restore.log 2>&1'
+```
+
+- Restore PostgresQL Kusama database:
+
+```
+tmux new-session -d -s restorePolkadot 'docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmxwfcf8858yy92.dump > /root/restore.log 2>&1'
 ```
 
 - Restore PostgresQL Moonbeam database:
