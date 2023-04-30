@@ -55,15 +55,11 @@ Make sure the indexer service versions are correct:
 
 >Important
 >
->Please change the **POSTGRES_PASSWORD** in postgres and **postgres-password** in coordinator-service to your own one
-
-::: warning Important
-Please go through the docker-compose file carefully, and change the following parameters to your own values:
-- POSTGRES_PASSWORD
-- postgres-password
-- secret-key
-- jwt-secret
-:::
+>Please go through the docker-compose file carefully, and change the following parameters to your own values:
+>- POSTGRES_PASSWORD
+>- postgres-password
+>- secret-key
+>- jwt-secret
 
 ## 3. Start Indexer Services:
 
