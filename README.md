@@ -4,7 +4,7 @@
 ## Recommended hardware requirements
 - CPU: 2 CPU
 - Memory: 8 GB RAM
-- Disk: 400 GB SSD Storage
+- Disk: 1 TB SSD Storage
 >Storage requirements will vary based on various factors (age of the chain, transaction rate, etc)
 
 ## Official documentation:
