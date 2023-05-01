@@ -193,13 +193,13 @@ tmux new-session -d -s restorePolkadot 'docker exec -it indexer_db pg_restore -v
 - Restore PostgresQL Kusama database:
 
 ```
-tmux new-session -d -s restoreKusama 'docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmxwfcf8858yy92.dump > /root/restore.log 2>&1'
+tmux new-session -d -s restoreKusama 'docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmxwfcf8858yy92.dump > /root/restore1.log 2>&1'
 ```
 
 - Restore PostgresQL Moonbeam database:
 
 ```
-tmux new-session -d -s restoreMoonbeam 'docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmrwisx41srrr8f.dump > /root/restore.log 2>&1'
+tmux new-session -d -s restoreMoonbeam 'docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmrwisx41srrr8f.dump > /root/restore2.log 2>&1'
 ```
 
 - To list the running tmux sessions, you can use the command:
