@@ -132,12 +132,6 @@ curl -o polkadot.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazon
 curl -o kusama.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazonaws.com/kusama/kusama.tar
 ```
 
-- Download Moonbeam Snapshot:
-
-```
-curl -o moonbeam.tar https://kepler-dictionary-projects.s3.ap-southeast-2.amazonaws.com/moonbean/moonbean.tar
-```
-
 - Extract Polkadot Snapshot:
 
 ```
@@ -148,11 +142,6 @@ tar -xvf polkadot.tar
 ```
 tar -xvf kusama.tar
 ```
-- Extract Moonbeam Snapshot:
-
-```
-tar -xvf moonbeam.tar
-```
 
 - Copy schema_qmzgazq7e1ozgfu.dump of Polkadot to `/root/subquery-indexer/.data/postgres`:
 
@@ -160,16 +149,25 @@ tar -xvf moonbeam.tar
 cp /root/polkadot/schema_qmzgazq7e1ozgfu.dump /root/subquery-indexer/.data/postgres/schema_qmzgazq7e1ozgfu.dump
 ```
 
+- Copy .mmr of Polkadot to `/home/poi/QmZGAZQ7e1oZgfuK4V29Fa5gveYK3G2zEwvUzTZKNvSBsm`:
+
+```
+mkdir -p /home/poi/QmZGAZQ7e1oZgfuK4V29Fa5gveYK3G2zEwvUzTZKNvSBsm
+cp /root/polkadot/.mmr /home/poi/QmZGAZQ7e1oZgfuK4V29Fa5gveYK3G2zEwvUzTZKNvSBsm/.mmr
+```
+
+
 - Copy schema_qmxwfcf8858yy92.dump of Kusama to `/root/subquery-indexer/.data/postgres`:
 
 ```
 cp /root/kusama/schema_qmxwfcf8858yy92.dump /root/subquery-indexer/.data/postgres/schema_qmxwfcf8858yy92.dump
 ```
 
-- Copy schema_qmrwisx41srrr8f.dump of Moonbeam to `/root/subquery-indexer/.data/postgres`:
+- Copy .mmr of Kusama to `/home/poi/QmXwfCF8858YY924VHgNLsxRQfBLosVbB31mygRLhgJbWn`:
 
 ```
-cp /root/moonbeam/schema_qmrwisx41srrr8f.dump /root/subquery-indexer/.data/postgres/schema_qmrwisx41srrr8f.dump
+mkdir -p /home/poi/QmXwfCF8858YY924VHgNLsxRQfBLosVbB31mygRLhgJbWn
+cp /root/kusama/.mmr /home/poi/QmXwfCF8858YY924VHgNLsxRQfBLosVbB31mygRLhgJbWn/.mmr
 ```
 
 - Install Tmux:
@@ -194,12 +192,6 @@ tmux new-session -d -s restorePolkadot 'docker exec -it indexer_db pg_restore -v
 
 ```
 tmux new-session -d -s restoreKusama 'docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmxwfcf8858yy92.dump > /root/restore1.log 2>&1'
-```
-
-- Restore PostgresQL Moonbeam database:
-
-```
-tmux new-session -d -s restoreMoonbeam 'docker exec -it indexer_db pg_restore -v -j 5 -h localhost -p 5432 -U postgres -d postgres /var/lib/postgresql/data/schema_qmrwisx41srrr8f.dump > /root/restore2.log 2>&1'
 ```
 
 - To list the running tmux sessions, you can use the command:
@@ -252,6 +244,11 @@ pg_restore: finished item 3184 TRIGGER _metadata 0xadf0dc4658acf912
 pg_restore: finished item 3315 TABLE DATA spec_versions
 pg_restore: launching item 3178 INDEX 0x510c96a4f8868d8a
 pg_restore: creating INDEX "schema_qmzgazq7e1ozgfu.0x510c96a4f8868d8a"
+```
+- To check the restore is finished, the log will end as follows::
+
+```
+pg_restore: finished main parallel loop
 ```
 
 After the data restored, you can start adding the specific project to you service inside admin app, and start indexing the project, the indexing will start basing on the restored data and continue indexing the project.
