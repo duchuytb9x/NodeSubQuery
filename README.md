@@ -1,4 +1,4 @@
-# Welcome to Kepler!
+# Welcome to Kepler in Linux!
 <img width="700" alt="Screen Shot 2022-11-01 at 20 54 41" src="https://blog.subquery.network/content/images/size/w1200/2023/04/kepler-on-poly.png">
 
 ## Recommended hardware requirements
