@@ -254,27 +254,27 @@ pg_restore: finished main parallel loop
 After the data restored, you can start adding the specific project to you service inside admin app, and start indexing the project, the indexing will start basing on the restored data and continue indexing the project.
 
 
-## Enabling SSL
+## 6. Enabling SSL
 
-### 1. Purchase a domain name
+### 6.1. Purchase a domain name
 
 You can purchase a domain from a lot of domain providers, we won't be providing a guide on how to do this. The rest of this guide assumes you have purchased `mysqindexer.com`
 
-### 2. Config DNS
+### 6.2. Config DNS
 
 Add a A record to your domain that points to your indexer's server IP address. For example, we add an A record for `proxy.mysqindexer.com` to our server's IP `210.10.5.61`.
 
-### 3. Get a SSL Cert
+### 6.3. Get a SSL Cert
 
 You can get a free SSL Cert from [Let's Encrypt](https://letsencrypt.org/), they offer a lot of ways to get a SSL Cert, you can choose the [one that fits your needs](https://letsencrypt.org/docs/client-options/).
 
 This tutorial will use Certbot + NGINX + Ubuntu as an example.
 
-#### 3.1 Install Certbot
+#### 6.3.1 Install Certbot
 
 Check [https://certbot.eff.org/instructions](https://certbot.eff.org/instructions) on how to do this step
 
-#### 3.2 Config NGINX
+#### 6.3.2 Config NGINX
 
 Edit your NGINX configuration to add the following (e.g. it would usually be at `/etc/nginx/sites-available/proxy.mysqindexer.com`)
 
@@ -286,7 +286,7 @@ server {
     server_name proxy.mysqindexer.com; // update the server name to match your DNS address
 
     location / {
-      proxy_pass      http://127.0.0.1:1080;
+      proxy_pass      http://127.0.0.1:80;
     }
 
 }
@@ -322,7 +322,7 @@ sudo certbot --nginx -d proxy.mysqindexer.com
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ```
 
-### 4. Update your indexer metadata
+### 6.4. Update your indexer metadata
 
 Update your indexer metadata, set the `Proxy Server Endpoint` to `https://proxy.mysqindexer.com`
 
