@@ -419,7 +419,6 @@ sudo systemctl restart prometheus
 ```
 - Check status of Prometheus
 ```sh
-sudo systemctl daemon-reload
 sudo systemctl status prometheus
 ```
 
@@ -537,7 +536,6 @@ sudo systemctl restart prometheus
 ```
 - Check status of Prometheus
 ```sh
-sudo systemctl daemon-reload
 sudo systemctl status prometheus
 ```
 # Initialize Dashboard
@@ -553,7 +551,7 @@ You will need to change your password after that
 To add data source you go to `Home > Administration > Data sources > Add data source`
 <img width="1275" alt="Screenshot_14" src="https://github.com/duchuytb9x/NodeSubQueryKepler/assets/32235812/ab74042e-fc52-4b27-a61a-aca85f4a3e0f">
 
-Enter the address `http://localhost:9000/` then Click `Save & Test`
+Enter the address `http://localhost:9000/`, username password then Click `Save & Test`
 <img width="1275" alt="Screenshot_1" src="https://github.com/duchuytb9x/NodeSubQueryKepler/assets/32235812/2e639598-be17-4f1a-80f0-a88d08b020ea">
 
 **`Step 2: Add Dashboard`**
