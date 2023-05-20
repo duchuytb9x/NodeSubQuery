@@ -1,15 +1,13 @@
-<h1 align="center"> Tài liệu cài đặt hệ thống giám sát Node Exporter </h1>
+<h1 align="center"> System monitoring system installation document </h1>
 
 
-# Phần II. triển khai Máy chủ giám sát
-
-## 1. Cài đặt Grafana
-**`Bước 1: Update system`**
+# I. Install Grafana
+**`Step 1: Update system`**
 
 ```sh
 sudo apt update
 ```
-**`Bước 2: Add Grafana APT repository`**
+**`Step 2: Add Grafana APT repository`**
 
 - Add Grafana gpg key which allows you to install signed packages.
 ```sh
@@ -20,16 +18,22 @@ curl -fsSL https://packages.grafana.com/gpg.key|sudo gpg --dearmor -o /etc/apt/t
 ```sh
 sudo add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
 ```
-**`Bước 3: Install Grafana on Ubuntu 20.04`**
-- Cài đặt Grafana
+**`Step 3: Install Grafana`**
+- Install Grafana
 ```sh
 sudo apt update
 sudo apt -y install grafana
 ```
-- Start Grafana service.
+- Start Grafana Service.
 ```sh
-root@PhanDucHuy:~# sudo systemctl enable --now grafana-server
-root@PhanDucHuy:~# systemctl status grafana-server.service
+sudo systemctl enable --now grafana-server
+```
+- Check Grafana Status
+```
+systemctl status grafana-server.service
+```
+- The result will be as follows
+```
 * grafana-server.service - Grafana instance
      Loaded: loaded (/lib/systemd/system/grafana-server.service; enabled; vendor preset: enabled)
      Active: active (running) since Fri 2022-12-02 09:38:37 +07; 4 days ago
@@ -43,70 +47,51 @@ root@PhanDucHuy:~# systemctl status grafana-server.service
 Dec 06 14:28:41 Prometheus-Obj grafana-server[343342]: logger=cleanup t=2022-12-06T14:28:41.715802349+07:00 level=info msg="Completed cleanup jobs" duratio>
 D
 ```
-**`Bước 4: Mở port fiwall`**
+**`Step 4: Open port fiwall`**
 ```sh
 sudo apt -y install ufw
 sudo ufw enable
 sudo ufw allow 3000/tcp
 ```
-
-
-
-**`Bước 5: Truy cập grafana`**
-<h3 align="center"><img src="../image/grafana.png"></h3>
-authen
-
-## 1. Cài đặt Prometheus
-**`Bước 1: Khởi tạo group hệ thống Prometheus`**
-- Khởi tạo user và add group
+# II. Install Prometheus
+# 1. Setup Prometheus
+**`Step 1: Add User Prometheus`**
 ```sh
 sudo useradd --no-create-home --shell /bin/false prometheus
 ```
-**`Bước 2: Tạo thư mục data & configs cho Prometheus`**
-- Tạo thư mục lưu trữ data
+**`Step 2: Create data & configs folder for Prometheus`**
 ```sh
-sudo mkdir /var/lib/prometheus
+sudo mkdir -p /var/lib/prometheus
+sudo mkdir -p /etc/prometheus/
 ```
 
-**`Bước 4: Download Prometheus on Ubuntu 20.04`**
+**`Step 4: Download Prometheus`**
 - Install wget.
 ```sh
 sudo apt update
 sudo apt -y install wget curl vim
 ```
-- download latest binary archive for Prometheus.
+- Download latest binary archive for Prometheus.
 ```sh
 mkdir -p /tmp/prometheus && cd /tmp/prometheus
 curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | grep browser_download_url | grep linux-amd64 | cut -d '"' -f 4 | wget -qi -
 ```
-- Giải nén file:
+- Extract the file:
 ```sh
 tar xvf prometheus*.tar.gz
 cd prometheus*/
 ```
-- Move the binary files to /usr/local/bin/ directory.
+- Move the binary files to `/usr/local/bin/` directory.
 ```sh
 sudo mv prometheus promtool /usr/local/bin/
 ```
-- Kiểm tra version
+- Check version
 ```sh
-root@PhanDucHuy:~# promtool --version
-promtool, version 2.40.5 (branch: HEAD, revision: 44af4716c86138869aa621737139e6dacf0e2550)
-  build user:       root@70f803b28803
-  build date:       20221201-12:50:06
-  go version:       go1.19.3
-  platform:         linux/amd64
-root@PhanDucHuy:~# prometheus --version
-prometheus, version 2.40.5 (branch: HEAD, revision: 44af4716c86138869aa621737139e6dacf0e2550)
-  build user:       root@70f803b28803
-  build date:       20221201-12:50:06
-  go version:       go1.19.3
-  platform:         linux/amd64
-root@PhanDucHuy:~#
+promtool --version
+prometheus --version
 ```
-- Di chuyển file cấu hình hệ thống vào `/etc`
+- Move the system configuration file to `/etc`
 ```sh
-sudo mkdir -p /etc/prometheus/
 sudo mv prometheus.yml /etc/prometheus/prometheus.yml
 ```
 - Also move consoles and console_libraries to /etc/prometheus directory:
@@ -114,8 +99,8 @@ sudo mv prometheus.yml /etc/prometheus/prometheus.yml
 sudo mv consoles/ console_libraries/ /etc/prometheus/
 cd $HOME
 ```
-**`Bước 3: Configure Prometheus on Ubuntu 20.04`**
-- Create or edit a configuration file for Prometheus – `/etc/prometheus/prometheus.yml`
+**`Step 3: Configure Prometheus`**
+- Create or edit a configuration file for Prometheus `/etc/prometheus/prometheus.yml`
 ```sh
 sudo vi /etc/prometheus/prometheus.yml
 ```
@@ -130,7 +115,7 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 ```
-- Tạo file quản lý service system
+- Create a file to manage the service system
 ```sh
 sudo tee /etc/systemd/system/prometheus.service<<EOF
 [Unit]
@@ -161,7 +146,7 @@ Restart=always
 WantedBy=multi-user.target
 EOF
 ```
-- Thay đổi quyền truy cập thư mục
+- Change folder permissions
 ```sh
 sudo chown prometheus:prometheus /etc/prometheus
 sudo chown prometheus:prometheus /var/lib/prometheus
@@ -179,7 +164,11 @@ sudo systemctl enable prometheus
 
 - Check status using systemctl status prometheus
 ```sh
-root@PhanDucHuy:~# systemctl status prometheus
+systemctl status prometheus
+```
+ - The result will be as follows:
+ ```
+root@PhanDucHuy:~# 
 ● prometheus.service - Prometheus
      Loaded: loaded (/etc/systemd/system/prometheus.service; enabled; vendor preset: enabled)
      Active: active (running) since Thu 2023-05-18 18:03:35 CEST; 1 day 18h ago
@@ -202,18 +191,18 @@ May 20 09:00:05 vmi871283.contaboserver.net prometheus[519154]: ts=2023-05-20T07
 May 20 11:00:03 vmi871283.contaboserver.net prometheus[519154]: ts=2023-05-20T09:00:03.466Z caller=compact.go:523 level=info component=tsdb msg="write block" mint=16845624016>
 May 20 11:00:03 vmi871283.contaboserver.net prometheus[519154]: ts=2023-05-20T09:00:03.504Z caller=head.go:1286 level=info component=tsdb msg="Head GC completed" caller=trunc>
 ```
-- Mở Port 9090
+- Allow Port 9090
 ```sh
 sudo ufw allow 9090/tcp
 ```
 
-- Kiểm tra truy cập máy chủ Prometheus `http://IP:9090`
+- Check Prometheus Server Access `http://IP:9090`
 <h3 align="center"><img src="../image/prome.png"></h3>
 
-## 2. Cài đặt bảo mật xác thực mật khẩu website cho Prometheus
-**`Bước 1: Hashing a password`**
+## 2. Security settings for website password authentication for Prometheus (Optional)
+**`Step 1: Hashing a password`**
 
-- Cài đặt packege requiment
+- Install package requirements
 ```sh
 sudo apt update
 sudo apt install python3-bcrypt -y
@@ -228,35 +217,34 @@ password = getpass.getpass("password: ")
 hashed_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
 print(hashed_password.decode())
 ```
-- Lưu và chạy Scripts
+- Save and Run Scripts
 ```sh
 python3 gen-pass.py
 ```
-- Khởi tạo mật khẩu
+- Password Initialization
 ```sh
-password: ObjStorage!@2022
-$2b$12$R2gJuDPOngpt.zReMxpCTOAOva2l5fB6BdtZo98cXwe2PyZfpk7x.
+password: 123456
+$2b$12$Ru/58U9Hw5nQZRiXkKObYeIC.ZZWpxxPn9O1Xlq9LPCMozG7di8hi
 ```
-- Lưu trữ mật khẩu
 
-**`Bước 2: Khởi tạo file Web yaml`**
+**`Step 2: Initialize yaml Web file`**
 
 -  tao file .yaml
 ```sh
 # vi /etc/prometheus/web.yml
 basic_auth_users:
-       admin: '$2b$12$UtOiLIMpJ4UrRmp0vZGKr.QQKkOsCZNDb7qEirjjBFulGerhP/lJ2'
+       admin: '$2b$12$Ru/58U9Hw5nQZRiXkKObYeIC.ZZWpxxPn9O1Xlq9LPCMozG7di8hi'
 ```
-> Lưu ý: thay thế nội dung key mã hõa bằng đoạn key đã tạo ở `bước 1`
+> Note: replace the content of the encrypted key with the key created in `Step 1`
 
 
-- Xác thực file cấu hình
+- Verify configuration file
 ```sh
 # promtool check web-config /etc/prometheus/web.yml
 /etc/prometheus/web.yml SUCCESS
 ```
 
-**`Bước 2: Launch Prometheus Server`**
+**`Step 2: Launch Prometheus Server`**
 
 - Update your Prometheus systemd unit file
 ```sh
@@ -316,7 +304,7 @@ Dec 06 12:00:06 Prometheus-Obj prometheus[381247]: ts=2022-12-06T05:00:06.790Z c
 D
 ```
 
-- Kiểm tra tính năng xác thực truy cập
+- Check Access Authentication
 ```sh
 $ curl -u admin http://localhost:9090/metrics
 Enter host password for user 'admin': <Enter the set password>
@@ -326,26 +314,24 @@ $ curl -u admin http://localhost:9090/metrics
 Enter host password for user 'admin':
 Unauthorized
 ```
-<h3 align="center"><img src="../image/authen.png"></h3>
 
-
-## 1. Cài đặt Prometheus
-**`Bước 1: Khởi tạo user`**
-- Khởi tạo user
+# III. Install Node Exporter
+## 1. Setup Node Exporter
+**`Step 1: Add User`**
 ```sh
 useradd -rs /bin/false nodeusr
 ```
-**`Bước 2: Download Node Exporter`**
+**`Step 2: Download Node Exporter`**
 - Install wget.
 ```sh
 sudo apt update
 sudo apt -y install wget curl vim
 ```
-- download latest binary archive for Prometheus.
+- Download latest binary archive for Node Exporter.
 ```sh
 curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep browser_download_url | grep linux-amd64 | cut -d '"' -f 4 | wget -qi -
 ```
-- Giải nén file:
+- Extract the file:
 ```sh
 tar xvf node_exporter*.tar.gz
 cd node_exporter*/
@@ -354,17 +340,11 @@ cd node_exporter*/
 ```sh
 sudo mv node_exporter /usr/local/bin/
 ```
-- Kiểm tra version
+- Check version
 ```sh
-root@PhanDucHuy:~# node_exporter --version
-node_exporter, version 1.5.0 (branch: HEAD, revision: 1b48970ffcf5630534fb00bb0687d73c66d1c959)
-  build user:       root@6e7732a7b81b
-  build date:       20221129-18:59:09
-  go version:       go1.19.3
-  platform:         linux/amd64
-root@PhanDucHuy:~#
+node_exporter --version
 ```
-**`Bước 3: Configure Prometheus on Ubuntu 20.04`**
+**`Step 3: Node Exporter`**
 - Create or edit a service system file for Node Exporter – `/etc/systemd/system/node_exporter.service`
 ```sh
 sudo tee /etc/systemd/system/node_exporter.service<<EOF
@@ -389,7 +369,7 @@ sudo systemctl start node_exporter
 sudo systemctl enable node_exporter
 ```
 
-- Check status using systemctl status prometheus
+- Check status using systemctl status node_exporter
 ```sh
 root@PhanDucHuy:~# systemctl status node_exporter
 ● node_exporter.service - Node Exporter
@@ -404,29 +384,64 @@ root@PhanDucHuy:~# systemctl status node_exporter
 
 Notice: journal has been rotated since unit was started, output may be incomplete.
 ```
-- Mở Port 9100
+- Allow Port 9100
 ```sh
 sudo ufw allow 9100/tcp
 ```
 
-- Kiểm tra truy cập máy chủ Node Exporter `http://IP:9100`
+- Node Exporter Server Access Test `http://IP:9100`
 <h3 align="center"><img src="../image/prome.png"></h3>
 
-## 2. Cài đặt bảo mật xác thực mật khẩu website cho Node Exporter
-**`Bước 1: Hashing a password`**
+**`Step 4: Configure Prometheus`**
+- Edit a configuration file for Prometheus – `/etc/prometheus/prometheus.yml`
+```sh
+sudo vi /etc/prometheus/prometheus.yml
+```
+  - The template
+  ```sh
+global:
+  scrape_interval: 10s
 
-- Cài đặt packege requiment
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'node_exporter'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9100']
+```
+- Restart the Prometheus Server
+```sh
+sudo systemctl daemon-reload
+sudo systemctl restart prometheus
+```
+- Check status of Prometheus
+```sh
+sudo systemctl daemon-reload
+sudo systemctl status prometheus
+```
+
+## 2. Security settings for website password authentication for Node Exporter (Optional)
+**`Step 1: Hashing a password`**
+
+- Install package requirements
 ```sh
 apt install apache2-utils
+```
+- Gen pass
+```
 htpasswd -nBC 10 "" | tr -d ':\n'; echo
 ```
-- Once installed, create a python script that will prompt for the password.
+- Initialize yaml config file
 ```sh
 # cat /etc/node-exporter/config.yml
 basic_auth_users:
   prometheus: <the-output-value-of-htpasswd>
 ```
-**`Bước 2: Launch Prometheus Server`**
+**`Step 2: Launch Prometheus Server`**
 
 - Update your Node Exporter systemd unit file
 ```sh
@@ -439,14 +454,14 @@ After=network.target
 User=nodeusr
 Group=nodeusr
 Type=simple
-ExecStart=/usr/local/bin/node_exporter--web.config.file=/etc/node-exporter/config.yml
+ExecStart=/usr/local/bin/node_exporter --web.config.file=/etc/node-exporter/config.yml
 
 [Install]
 WantedBy=multi-user.target
 EOF
 ```
 
-- restart the Prometheus Server
+- Restart the Prometheus Server
 ```sh
 sudo systemctl daemon-reload
 sudo systemctl restart prometheus
@@ -455,9 +470,9 @@ sudo systemctl enable prometheus
 
 - Confirm Prometheus service is started without errors
 ```sh
-root@PhanDucHuy:~# systemctl status prometheus
+systemctl status prometheus
 ```
-- Kết quả sẽ như sau:
+- The result will be as follows:
 ```
 ● node_exporter.service - Node Exporter
      Loaded: loaded (/etc/systemd/system/node_exporter.service; enabled; vendor preset: enabled)
@@ -481,7 +496,7 @@ May 18 21:51:33 vmi1291386.contaboserver.net node_exporter[730704]: ts=2023-05-1
 May 18 21:51:33 vmi1291386.contaboserver.net node_exporter[730704]: ts=2023-05-19T01:51:33.002Z caller=tls_config.go:271 level=info msg="TLS is disabled." http2=false address>
 ```
 
-- Kiểm tra tính năng xác thực truy cập
+- Check Access Authentication
 ```sh
 $ curl -u prometheus http://localhost:9100/metrics
 Enter host password for user 'prometheus': <Enter the set password>
@@ -492,4 +507,69 @@ Enter host password for user 'prometheus':
 Unauthorized
 ```
 <h3 align="center"><img src="../image/authen.png"></h3>
-authen
+
+**`Step 3: Configure Prometheus`**
+- Edit a configuration file for Prometheus – `/etc/prometheus/prometheus.yml`
+```sh
+sudo vi /etc/prometheus/prometheus.yml
+```
+  - The template
+  ```sh
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'node_exporter'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9100']
+    basic_auth:
+      username: prometheus
+      password: "123456"
+```
+- Restart the Prometheus Server
+```sh
+sudo systemctl daemon-reload
+sudo systemctl restart prometheus
+```
+- Check status of Prometheus
+```sh
+sudo systemctl daemon-reload
+sudo systemctl status prometheus
+```
+# Initialize Dashboard
+**`Step 1: Log in to Grafana`**
+
+Go to http://IP:3000
+<img width="1275" alt="Screenshot_2" src="https://github.com/duchuytb9x/NodeSubQueryKepler/assets/32235812/bf827430-4022-4d35-aca2-55438045e45e">
+Login to grafana with username and password admin/admin
+You will need to change your password after that
+
+**`Step 2: Add data source`**
+
+To add data source you go to `Home > Administration > Data sources > Add data source`
+<img width="1275" alt="Screenshot_14" src="https://github.com/duchuytb9x/NodeSubQueryKepler/assets/32235812/ab74042e-fc52-4b27-a61a-aca85f4a3e0f">
+
+Enter the address `http://localhost:9000/` then Click `Save & Test`
+<img width="1275" alt="Screenshot_1" src="https://github.com/duchuytb9x/NodeSubQueryKepler/assets/32235812/2e639598-be17-4f1a-80f0-a88d08b020ea">
+
+**`Step 2: Add Dashboard`**
+
+To add data Dashboard you go to `Home > Dashboards > New > Import`
+<img width="1275" alt="Screenshot_3" src="https://github.com/duchuytb9x/NodeSubQueryKepler/assets/32235812/236cf8e7-cfa9-4f68-a220-dc261c30d3b6">
+
+Enter `1860` in the textbox `Import via grafana.com` then Click `Load`
+<img width="1275" alt="Screenshot_4" src="https://github.com/duchuytb9x/NodeSubQueryKepler/assets/32235812/cc8d6d30-891a-493e-87f2-774fbc4a1b13">
+
+Select prometheus source then Click `Import`
+<img width="1275" alt="Screenshot_5" src="https://github.com/duchuytb9x/NodeSubQueryKepler/assets/32235812/a66c3bbd-7eb3-4a99-a317-d9b7b9dbd0a8">
+
+And here is the result:
+<img width="1275" alt="Screenshot_6" src="https://github.com/duchuytb9x/NodeSubQueryKepler/assets/32235812/9ce51c2d-219e-43bb-8565-ed562bcbac81">
+
+ALL DONE!!!
