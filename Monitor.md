@@ -1,5 +1,6 @@
 <h1 align="center"> System monitoring system installation document </h1>
 
+<img width="1275" alt="Screenshot_6" src="https://github.com/duchuytb9x/NodeSubQueryKepler/assets/32235812/12263fc0-de19-45db-a22f-7facbd1bbc24">
 
 # I. Install Grafana
 **`Step 1: Update system`**
