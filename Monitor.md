@@ -66,7 +66,7 @@ sudo mkdir -p /var/lib/prometheus
 sudo mkdir -p /etc/prometheus/
 ```
 
-**`Step 4: Download Prometheus`**
+**`Step 3: Download Prometheus`**
 - Install wget.
 ```sh
 sudo apt update
@@ -100,7 +100,7 @@ sudo mv prometheus.yml /etc/prometheus/prometheus.yml
 sudo mv consoles/ console_libraries/ /etc/prometheus/
 cd $HOME
 ```
-**`Step 3: Configure Prometheus`**
+**`Step 4: Configure Prometheus`**
 - Create or edit a configuration file for Prometheus `/etc/prometheus/prometheus.yml`
 ```sh
 sudo vi /etc/prometheus/prometheus.yml
@@ -244,7 +244,7 @@ basic_auth_users:
 /etc/prometheus/web.yml SUCCESS
 ```
 
-**`Step 2: Launch Prometheus Server`**
+**`Step 3: Launch Prometheus Server`**
 
 - Update your Prometheus systemd unit file
 ```sh
@@ -554,7 +554,7 @@ To add data source you go to `Home > Administration > Data sources > Add data so
 Enter the address `http://localhost:9000/`, username password then Click `Save & Test`
 <img width="1275" alt="Screenshot_1" src="https://github.com/duchuytb9x/NodeSubQueryKepler/assets/32235812/2e639598-be17-4f1a-80f0-a88d08b020ea">
 
-**`Step 2: Add Dashboard`**
+**`Step 3: Add Dashboard`**
 
 To add data Dashboard you go to `Home > Dashboards > New > Import`
 <img width="1275" alt="Screenshot_3" src="https://github.com/duchuytb9x/NodeSubQueryKepler/assets/32235812/236cf8e7-cfa9-4f68-a220-dc261c30d3b6">
