@@ -198,7 +198,6 @@ sudo ufw allow 9090/tcp
 ```
 
 - Check Prometheus Server Access `http://IP:9090`
-<h3 align="center"><img src="../image/prome.png"></h3>
 
 ## 2. Security settings for website password authentication for Prometheus (Optional)
 **`Step 1: Hashing a password`**
@@ -391,7 +390,6 @@ sudo ufw allow 9100/tcp
 ```
 
 - Node Exporter Server Access Test `http://IP:9100`
-<h3 align="center"><img src="../image/prome.png"></h3>
 
 **`Step 4: Configure Prometheus`**
 - Edit a configuration file for Prometheus – `/etc/prometheus/prometheus.yml`
@@ -507,7 +505,6 @@ $ curl -u prometheus http://localhost:9100/metrics
 Enter host password for user 'prometheus':
 Unauthorized
 ```
-<h3 align="center"><img src="../image/authen.png"></h3>
 
 **`Step 3: Configure Prometheus`**
 - Edit a configuration file for Prometheus – `/etc/prometheus/prometheus.yml`
