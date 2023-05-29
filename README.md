@@ -51,7 +51,7 @@ Make sure the indexer service versions are correct:
 | Service                        | Version   |
 | :----------------------------- | :-------- |
 | onfinality/subql-coordinator   | v1.0.4    |
-| onfinality/subql-indexer-proxy | v1.0.1    |
+| onfinality/subql-indexer-proxy | v1.0.2    |
 
 >Important
 >
