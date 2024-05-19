@@ -1,5 +1,5 @@
 # Welcome to Kepler in Linux!
-<img width="700" alt="Screen Shot 2022-11-01 at 20 54 41" src="https://blog.subquery.network/content/images/size/w1200/2023/04/kepler-on-poly.png">
+<img width="700" alt="Screen Shot 2022-11-01 at 20 54 41" src="https://blog.subquery.network/content/images/size/w1200/2024/02/subquery-network-coming.png">
 
 ## Recommended hardware requirements
 - CPU: 2 CPU
