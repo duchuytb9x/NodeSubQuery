@@ -6,8 +6,8 @@ In order to speed up the onboarding of Data Indexer Project, we are providing da
 
 ## Downloading Database Snapshots
 
-| Schema Name | DeploymentId | Database Size | OneDrive URL |
-| ----------- | ------------ | ------------------ | ------------ |
+| Schema Name | DeploymentId | Database Size | OneDrive URL                                                                                                                   |
+| ----------- | ------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------ |
 | schema_qme58h3kvczyxhe | `Qme58h3kvCZYXHEMuJLo2mHTJSYfGCfQ9Mo4MvKDGPuVyA` | 0.782 GB | `https://phanduchuy-my.sharepoint.com/:u:/g/personal/duchuytb9x_phanduchuy_onmicrosoft_com/EdC4rq4H09VNt1Hmb1vxM3YBl7UMeiLa19mgMIJ2rcFj8w?e=CmH7eB&download=1` |
 | schema_qmttxz7yyxtsdhb | `QmTTXz7yyxTSDHbSt8fLDbhzwQ3UwWC3jwvwnjZXvDQKuW` | 1.752 GB | `https://phanduchuy-my.sharepoint.com/:u:/g/personal/duchuytb9x_phanduchuy_onmicrosoft_com/EYw8M5fuc3lNun_JNY0xwh0BeFU-K7KuLWTu2AjOmpeOGQ?e=gP1i7d&download=1` |
 | schema_qmpktxq1hw1mnt8 | `QmPkTXq1hw1MNt8rVEySAL3izgYa5jRdQbEK9AmERhcM2S` | 1.855 GB | `https://phanduchuy-my.sharepoint.com/:u:/g/personal/duchuytb9x_phanduchuy_onmicrosoft_com/EXCGuA7DW_1JlRG5U9iJ4mIBIU5_b-aUdj8vfdt9kPMKfg?e=kLSBnl&download=1` |
