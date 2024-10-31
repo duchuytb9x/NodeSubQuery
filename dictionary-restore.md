@@ -69,7 +69,7 @@ wget "https://phanduchuy-my.sharepoint.com/:u:/g/personal/duchuytb9x_phanduchuy_
 
 
 ```bash
-cp /root/polkadot/schema_qmbe5g5vbejyyaf.dump /root/subquery-indexer/.data/postgres/schema_qmbe5g5vbejyyaf.dump
+cp /root/schema_qmbe5g5vbejyyaf.dump /root/subquery-indexer/.data/postgres/schema_qmbe5g5vbejyyaf.dump
 ```
 
 2. Run this command in `tmux`:
